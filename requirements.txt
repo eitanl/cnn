@@ -1,0 +1,4 @@
+torch
+torchvision # for the models
+numpy
+matplotlib
