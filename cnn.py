@@ -43,7 +43,7 @@ test_loader = DataLoader(test_dataset, batch_size=64, shuffle=False)
 model = CNN()
 
 # Define loss function and optimizer
-criterion = nn.CrossEntropyLoss()
+loss_fn = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 
 # Training loop
@@ -55,7 +55,7 @@ for epoch in range(epochs):
         # Forward pass
         outputs = model(images)
         # Calculate loss
-        loss = criterion(outputs, labels)
+        loss = loss_fn(outputs, labels)
         # Backward pass
         loss.backward()
         # Update weights
