@@ -5,6 +5,8 @@ import torch.optim as optim
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
 
+EXPECTED_SIZE = (28, 28) # grayscale MNIST-like
+
 # Define the CNN architecture
 class CNN(nn.Module):
     def __init__(self):
