@@ -8,6 +8,8 @@ echo "Activating"
 source env/Scripts/activate
 
 echo "Installing requirements"
+export PIP_REQUIRE_VIRTUALENV=true
+# PIP_REQUIRE_VIRTUALENV=true protects us in case that the virtual environment was not set for any reason
 pip install -r requirements.txt
 
 echo

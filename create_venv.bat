@@ -11,6 +11,8 @@ echo Activating
 call env\Scripts\activate.bat
 
 echo Installing requirements
+set PIP_REQUIRE_VIRTUALENV=true
+REM PIP_REQUIRE_VIRTUALENV=true protects us in case that the virtual environment was not set for any reason
 pip install -r requirements.txt
 
 pip list
