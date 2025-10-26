@@ -1,5 +1,6 @@
 # cnn
-a simple cnn
+a simple cnn, implemented in python using PyTorch
+
 
 * תמונת קלט 28x28 מונוכרומטית
   * שכבת קונב' ראשונה: **288** + 32 פרמטרים (32 קונב' 3x3) 
@@ -11,3 +12,12 @@ a simple cnn
 * ווקטור באורך 128
   * שכבה FC / לינארית שניה: **1,280** + 10 פרמטרים
 * פלט באורך 10 (אחד לכל סיפרה אפשרית)
+
+Training and testing is done on the MNIST dataset.
+
+### How to use
+* create a virtual environment (recommended) and install the requirements - using the provided scripts
+* run cnn.py - it will do
+  * model set up
+  * training (from scratch )
+  * testing / evaluation
