@@ -21,14 +21,14 @@ class CNN(nn.Module):
         self.fc2 = nn.Linear(128, 10)  # 10 output classes (e.g., for MNIST digits)
 
     def forward(self, x):
-        # Convolutional layers with ReLU activation and pooling
+        # 2 Convolutional layers with ReLU activation and pooling
         x = self.pool(F.relu(self.conv1(x)))
         x = self.pool(F.relu(self.conv2(x)))
         # Flatten the tensor for the fully connected layers
         x = x.view(-1, 64 * 7 * 7)
-        # Fully connected layers with ReLU activation
+        # A fully connected layer with ReLU activation
         x = F.relu(self.fc1(x))
-        # Output layer (no activation needed here)
+        # A fully connected layer - the output layer (no activation needed here)
         x = self.fc2(x)
         return x
 
@@ -49,7 +49,7 @@ loss_fn = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 
 # Training loop
-epochs = 10
+epochs = 2
 for epoch in range(epochs):
     for i, (images, labels) in enumerate(train_loader):
         # Zero the gradients
@@ -77,3 +77,4 @@ with torch.no_grad():
         correct += (predicted == labels).sum().item()
 
     print(f'Accuracy of the model on the test images: {100 * correct / total:.2f}%')
+
