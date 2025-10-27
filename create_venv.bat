@@ -1,7 +1,4 @@
 @echo off
-echo Note: Run this script from Window's Command Prompt (not PowerShell)
-REM Window's PowerShell has its own activation script (Activate.ps1) and its own way calling it
-pause
 
 echo Installing virtual environment
 python -m venv env
@@ -11,8 +8,8 @@ echo Activating
 call env\Scripts\activate.bat
 
 echo Installing requirements
+REM protect us in case that the virtual environment was not set for any reason
 set PIP_REQUIRE_VIRTUALENV=true
-REM PIP_REQUIRE_VIRTUALENV=true protects us in case that the virtual environment was not set for any reason
 pip install -r requirements.txt
 
 pip list
