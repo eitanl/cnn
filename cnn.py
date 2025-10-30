@@ -32,49 +32,52 @@ class CNN(nn.Module):
         x = self.fc2(x)
         return x
 
-# Load MNIST dataset
-transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5,), (0.5,))])
-train_dataset = datasets.MNIST(root='./data', train=True, download=True, transform=transform)
-test_dataset = datasets.MNIST(root='./data', train=False, download=True, transform=transform)
 
-# Create data loaders
-train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True)
-test_loader = DataLoader(test_dataset, batch_size=64, shuffle=False)
+if __name__ == '__main__':
 
-# Instantiate the model
-model = CNN()
+    # Load MNIST dataset
+    transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5,), (0.5,))])
+    train_dataset = datasets.MNIST(root='./data', train=True, download=True, transform=transform)
+    test_dataset = datasets.MNIST(root='./data', train=False, download=True, transform=transform)
 
-# Define loss function and optimizer
-loss_fn = nn.CrossEntropyLoss()
-optimizer = optim.Adam(model.parameters(), lr=0.001)
+    # Create data loaders
+    train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True)
+    test_loader = DataLoader(test_dataset, batch_size=64, shuffle=False)
 
-# Training loop
-epochs = 10
-for epoch in range(epochs):
-    for i, (images, labels) in enumerate(train_loader):
-        # Zero the gradients
-        optimizer.zero_grad()
-        # Forward pass
-        outputs = model(images)
-        # Calculate loss
-        loss = loss_fn(outputs, labels)
-        # Backward pass
-        loss.backward()
-        # Update weights
-        optimizer.step()
-        if (i+1) % 100 == 0:
-             print(f'Epoch [{epoch+1}/{epochs}], Step [{i+1}/{len(train_loader)}], Loss: {loss.item():.4f}')
+    # Instantiate the model
+    model = CNN()
 
-# Evaluation
-model.eval()
-with torch.no_grad():
-    correct = 0
-    total = 0
-    for images, labels in test_loader:
-        outputs = model(images)
-        _, predicted = torch.max(outputs.data, 1)
-        total += labels.size(0)
-        correct += (predicted == labels).sum().item()
+    # Define loss function and optimizer
+    loss_fn = nn.CrossEntropyLoss()
+    optimizer = optim.Adam(model.parameters(), lr=0.001)
 
-    print(f'Accuracy of the model on the test images: {100 * correct / total:.2f}%')
+    # Training loop
+    epochs = 10
+    for epoch in range(epochs):
+        for i, (images, labels) in enumerate(train_loader):
+            # Zero the gradients
+            optimizer.zero_grad()
+            # Forward pass
+            outputs = model(images)
+            # Calculate loss
+            loss = loss_fn(outputs, labels)
+            # Backward pass
+            loss.backward()
+            # Update weights
+            optimizer.step()
+            if (i+1) % 100 == 0:
+                 print(f'Epoch [{epoch+1}/{epochs}], Step [{i+1}/{len(train_loader)}], Loss: {loss.item():.4f}')
+
+    # Evaluation
+    model.eval()
+    with torch.no_grad():
+        correct = 0
+        total = 0
+        for images, labels in test_loader:
+            outputs = model(images)
+            _, predicted = torch.max(outputs.data, 1)
+            total += labels.size(0)
+            correct += (predicted == labels).sum().item()
+
+        print(f'Accuracy of the model on the test images: {100 * correct / total:.2f}%')
 
