@@ -49,7 +49,7 @@ loss_fn = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 
 # Training loop
-epochs = 2
+epochs = 10
 for epoch in range(epochs):
     for i, (images, labels) in enumerate(train_loader):
         # Zero the gradients
