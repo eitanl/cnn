@@ -68,6 +68,10 @@ if __name__ == '__main__':
             if (i+1) % 100 == 0:
                  print(f'Epoch [{epoch+1}/{epochs}], Step [{i+1}/{len(train_loader)}], Loss: {loss.item():.4f}')
 
+    MODEL_STATE_FILENAME = 'trained_model.pt'
+    torch.save(model.state_dict(), MODEL_STATE_FILENAME)
+    print(f'Model state saved to: {MODEL_STATE_FILENAME}')
+
     # Evaluation
     model.eval()
     with torch.no_grad():
