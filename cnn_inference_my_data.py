@@ -13,8 +13,8 @@ print(f'Model state loaded from: {MODEL_STATE_FILENAME}')
 # load my data
 img_PIL = Image.open("mydata/digit.png").convert('L')
 img = transforms.ToTensor()(img_PIL)
-img = 2 * (img - 0.5)
-images_batch = torch.empty([1] + list(img.shape))
+img = 2 * (img - 0.5)   # todo: consider using model & pre-trained weights from modern torchvision.models, then use weights.transforms() for pre-processing!
+images_batch = torch.empty([1] + list(img.shape))   # todo: use unsqueeze(0) instead!
 images_batch[0,0,:,:] = img
 
 # run inference on my data
